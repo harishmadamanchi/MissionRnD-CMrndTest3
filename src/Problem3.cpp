@@ -63,7 +63,12 @@ Helper Functions are optional to write
 */
 //Helper Functions Start
 int isOperator(char *data){
-	return 0;
+	if (*data == '+')
+		return 1;
+	else if (*data == '-')
+		return 2;
+	else if (*data == '*')
+		return 3;
 }
 int isOperand(char *data){
 	return 0;
@@ -74,6 +79,28 @@ int getOperand(char *data){
 }
 //Helper Functions end
 int solve_tree(struct enode *root){
-    return -1;
+	if (root == NULL)
+		return -1;
+	int cal;
+//	cal=inorder(root);
+}
+/*int inorder(struct enode *root){
+	int op, a, b;
+	if (root != NULL){
+		inorder(root->left);
+		op=isOperator(root->data);	
+		inorder(root->right);
+		a = (root->left->data) - '0';
+		b = (root->right->data) - '0';
+		return calculate(a, op, b);
+	}
 }
 
+int calculate(int a, int op, int b){
+	if (op == 1)
+		return a + b;
+	else if (op == 2)
+		return a - b;
+	else if (op == 3)
+		return a*b;
+}*/

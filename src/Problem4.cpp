@@ -37,5 +37,26 @@ struct node{
 };
 
 void merge_two_bst(struct node *root1, struct node *root2){
-	
+	if (root1 == NULL || root2 == NULL)
+		return;
+	int *arr, index = 0;
+	int i = 0;
+	arr = (int*)malloc(sizeof(int));
+	inorder2array(root2,arr,&index);
+	struct node *temp;
+	temp = root1;
+	for (i = 0; i < index; i++){
+		insert(temp, arr[i]);
+	}
 }
+
+void inorder2array(struct node *root, int *arr, int *index){
+	if (root != NULL){
+		inorder2array(root->left, arr, index);
+		arr[*index] = root->data;
+		*index = *index + 1;
+		inorder2array(root->right, arr, index);
+	}
+}
+
+void insert()

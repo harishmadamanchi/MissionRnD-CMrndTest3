@@ -44,6 +44,8 @@ Difficulty : Easy
 #include <stdio.h>
 #include <math.h>
 
+void inorder(struct node *, int *,int);
+
 struct node{
 	int data;
 	struct node *left;
@@ -52,5 +54,23 @@ struct node{
 
 
 int get_missing_value(struct node *root,int n){
-    return -1;
+	if (root == NULL)
+		return -1;
+	int sum = 0;
+	int tempsum = 0;
+	tempsum = (n*(n + 1)) / 2;
+	int res;
+	inorder(root,&sum,n);
+	res = tempsum - sum;
+	return res;
+
+}
+
+void inorder(struct node *root,int *sum,int n){
+	if (root != NULL){
+		inorder(root->left,sum,n);
+		if (root->data>=0 && root->data<=n)
+			*sum = *sum + root->data;
+		inorder(root->right,sum,n);
+	}
 }

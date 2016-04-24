@@ -59,6 +59,9 @@ Difficulty : Medium +
 */
 #include <stdlib.h>
 #include <stdio.h>
+int inorder(struct node *root, struct node_dll *temp, int *res);
+int preorder(struct node *root, struct node_dll *temp, int *res);
+int postorder(struct node *root, struct node_dll *temp, int *res);
 
 struct node_dll{
 	int data;
@@ -72,5 +75,73 @@ struct node{
 };
 
 int is_identical(struct node_dll *head, struct node *root){
-	return -1;
+	if (head == NULL || root == NULL){
+		return -1;
+	}
+	struct node_dll *temp;
+	int res1, res2, res3, *res=0;
+	temp = head;
+	res1 = inorder(root, temp,res);
+	/*temp = head;
+	*res = 0;
+	res2 = preorder(root, temp,res);
+	*res = 0;
+	temp = head;
+	res3 = postorder(root, temp,res);*/
+	if (res1 == 0 /*|| res2 == 0 || res3 == 0*/)
+		return 1;
+	else
+		return 0;
+}
+
+int inorder(struct node *root, struct node_dll *temp,int *res){
+	if (root != NULL){
+		inorder(root->left, temp,res);
+		if (root->data == temp->data){
+			temp = temp->next;
+		}
+		else
+			*res = 1;
+		inorder(root->right,temp,res);
+	}
+	if (*res == 1){
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int preorder(struct node *root, struct node_dll *temp, int *res){
+	if (root != NULL){
+		if (root->data == temp->data){
+			temp = temp->next;
+		}
+		else
+			*res = 1;
+		preorder(root->left, temp, res);
+		preorder(root->right, temp, res);
+	}
+	if (*res == 1){
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int postorder(struct node *root, struct node_dll *temp, int *res){
+	
+		postorder(root->left, temp, res);
+		postorder(root->right, temp, res);
+		if (root != NULL){
+			if (root->data == temp->data){
+				temp = temp->next;
+			}
+			else
+				*res = 1;
+	}
+	if (*res == 1){
+		return 1;
+	}
+	else
+		return 0;
 }
