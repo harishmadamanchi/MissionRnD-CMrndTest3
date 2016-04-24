@@ -46,7 +46,7 @@ void merge_two_bst(struct node *root1, struct node *root2){
 	struct node *temp;
 	temp = root1;
 	for (i = 0; i < index; i++){
-		insert(temp, arr[i]);
+//		insert(temp, arr[i]);
 	}
 }
 
